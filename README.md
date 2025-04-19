@@ -1,5 +1,11 @@
 # 🛠️Linux Commands
 
+If you are beginner in Linux, and have only ever used Windows, do consider reading the following articles, before directly jumping upon the commands, to understand the Linux better.
+- [Exploring Linux: Its Origins, Why It’s Different, and How It Compares to Windows and macOS](https://controlplusblog.hashnode.dev/exploring-linux-its-origins-why-its-different-and-how-it-compares-to-windows-and-macos)
+- [Why the Juice Seller at MacOS Gets the Order of a Linux User, But Windows Looks Confused](https://controlplusblog.hashnode.dev/why-the-juice-seller-at-macos-gets-the-order-of-a-linux-user-but-windows-looks-confused)
+  - Explains why the Linux commands we use run on Linux and MacOS, but not in Windows
+  - Covers terminologies like CLI, Shell, Termial, Bash, Zsh, Command Prompt, PowerShell
+ 
 <br>
 
 ## 🔧 Some basic commands
@@ -1039,3 +1045,19 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
 > [!NOTE]
 > - Wildcard are not commands themselves, but are used with other linux commands such as `ls`, `cp`, `rm`, `mv`, `find`, etc.
 > - Wildcards match filenames and directory names; they do not search within file content.
+
+## 📬 Connect with Me  
+  
+<div align="center">
+
+[![X](https://img.shields.io/badge/X-%23000000.svg?logo=X&logoColor=white)](https://twitter.com/VishalKapgate)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?logo=gmail&logoColor=white)](mailto:vishaldk26@gmail.com)
+[![LinkedIn](https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff)](https://linkedin.com/in/vishalkapgate)
+
+</div>
+
+## 🤝 Contributing
+Contributions are welcome!  
+
+- Found an error? Let me know (even spelling mistakes count! 📝).  
+- Have useful learning notes? Feel free to fork & enhance this repository!
