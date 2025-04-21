@@ -3,8 +3,6 @@
 If you are beginner in Linux, and have only ever used Windows, do consider reading the following articles, before directly jumping upon the commands, to understand the Linux better.
 - [Exploring Linux: Its Origins, Why It’s Different, and How It Compares to Windows and macOS](https://controlplusblog.hashnode.dev/exploring-linux-its-origins-why-its-different-and-how-it-compares-to-windows-and-macos)
 - [Why the Juice Seller at MacOS Gets the Order of a Linux User, But Windows Looks Confused](https://controlplusblog.hashnode.dev/why-the-juice-seller-at-macos-gets-the-order-of-a-linux-user-but-windows-looks-confused)
-  - Explains why the Linux commands we use run on Linux and MacOS, but not in Windows
-  - Covers terminologies like CLI, Shell, Termial, Bash, Zsh, Command Prompt, PowerShell
  
 <br>
 
