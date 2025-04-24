@@ -951,18 +951,39 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
 
 ## 👨‍💻 User Management
 
+**User** - Entity that performs tasks and actions. Each user has an ID.
+
+There are three types of users in Linux:
+
+| User            | Description                   | ID                |
+|-----------------|-------------------------------|-------------------|
+| 1. Root User    | Super admin                   | 0                 |
+| 2. System Users | Ceated by OS to run processes | 1 - 999           |
+| 3. Local Users  | Human users                   | > 999 upto 60,000 |
+
+> [!NOTE]
+> - For System Users (processes), if all IDs from 1 t0 999 are already in use, then IDs from local users are assigned to the processes
+> - For Local Users, the upper limit of 60,000 is for Ubuntu. This number is kept for optimal performance and can be changed if required.
+
+> [!IMPORTANT]
+> **Why don't we use root user for everyday tasks?**
+>   - We have multiple users working on a system, so giving root access to each user is not a good practice, as it would be very difficult to track user activities.
+>   - Insted we create local users. These local users can have the root privileges using `sudo`.
 <br>
 
-  | Examples            | Description                                                     |
-  |-----------          |-------------                                                    |
-  | `useradd new_user`  | Creates user `new_user` on our linux server                     |
-  | `id new_user`       | Check user ID, group ID and groups                              |
-  | `passwd new_user`   | Set password for the user `new_user`                            |
-  | `groupadd new_group`| Creates group `new group`                                       |
-  | `cat /etc/group`    | Check groups                                                    |
-  | `userdel user8`     | Deletes user `user8`                                            |
-  | `groupdel group10`  | Deletes group `group10`                                         |
-  | `usermod -G new_group new_user` | Adds user `new_user` to group `new_group`           |
+| Commands                                | Description                                                                             |
+|-----------------------------------------|-----------------------------------------------------------------------------------------|
+| `whoami`                                | Displays current user                                                                   |
+| `sudo cat /etc/passwd`                  | Prints all users                                                                        |
+| `sudo cat /etc/shadow`                  | Print hashed passwords and account related security details for all users in the system |
+| `id user_name`                          | Displays UID, GID and groups for current user                                           |
+| `sudo adduser user_name`                | Creates a new user `user_name`                                                          |
+| `sudo userdel -r user_name`             | Deletes user `user_name`                                                                |
+| `sudo cat /etc/group`                   | Prints all groups                                                                       |
+| `sudo addgroup group_name`              | Creates a new group `user_name`                                                         |
+| `sudo usermod -aG group_name user_name` | Adds user `user_name` to group `group_name`                                             |
+> [!CAUTION]
+> Not using append flag (`a`), will remove all other users from the group
 
 <br>
 
