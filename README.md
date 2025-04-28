@@ -977,13 +977,62 @@ There are three types of users in Linux:
 | `sudo cat /etc/passwd`                  | Prints all users                                                                        |
 | `sudo cat /etc/shadow`                  | Print hashed passwords and account related security details for all users in the system |
 | `id user_name`                          | Displays UID, GID and groups for current user                                           |
-| `sudo adduser user_name`                | Creates a new user `user_name`                                                          |
-| `sudo userdel -r user_name`             | Deletes user `user_name`                                                                |
-| `sudo cat /etc/group`                   | Prints all groups                                                                       |
-| `sudo addgroup group_name`              | Creates a new group `user_name`                                                         |
-| `sudo usermod -aG group_name user_name` | Adds user `user_name` to group `group_name`                                             |
-> [!CAUTION]
-> Not using append flag (`a`), will remove all other users from the group
+
+### Adding user
+
+**1. `useradd` - low level command for user creation**
+ - Creates user, but does not create a home directory and other skeleton. We need to create everything manually.
+
+   | Commands                    | Description                                           |
+   |-----------------------------|-------------------------------------------------------|
+   | `sudo useradd user_name`    | Creates a new user `user_name` (without any skeleton) |
+   | `sudo passwd user_name`     | Set or change password for `user_name`                |
+   | `sudo useradd -m user_name` | Creates user `user_name`  with home directory         |
+
+**2. `adduser` - high level command for user creation**
+ - Creates user, along with a home directory and other skeleton.
+
+   | Commands                                | Description                               |
+   |-----------------------------------------|-------------------------------------------|
+   | `sudo adduser user_name`                | Creates a new user `user_name`            |
+
+### Delete user
+
+ | Commands                                | Description                               |
+ |-----------------------------------------|-------------------------------------------|
+ | `sudo userdel -r user_name`             | Deletes user `user_name`                  |
+
+### Group management
+
+| Commands                               | Description                                 |
+|----------------------------------------|---------------------------------------------|
+| `sudo cat /etc/group`                  | Prints all groups                           |
+| `sudo addgroup group_name`             | Creates a new group `user_name`             |
+| `sudo usermod -aG group_name user_name`| Adds user `user_name` to group `group_name` |
+| `sudo groupdel group_name`             | Deletes group `group_name`                  |
+| `groups user_name`                     | Displays all groups to which a user belongs |
+| `getent group group_name`              | Display all users in group                  |
+| `grep group_name /etc/group`           | Display all users in group                  |
+
+
+  > [!CAUTION]
+  > Not using append flag (`a`), will remove all other users from the group
+
+### Renaming user
+
+| Commands                                                  | Description                                                                                                                                                         |
+|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `sudo usermod -l new_username old_username`               | Change username (but this will not change the home directory)                                                                                                       |
+| `sudo groupmod -n new_usernam old_username`               | Change groupname                                                                                                      |
+| `sudo mkdir /home/new_username`                           | Create home directory for user `new_user`                                                                                                                           |
+| `sudo chown new_username:new_username /home/new_username` | Gives full ownership of `new_username` to the user `new_username` and to the group `new_username`                                                                   |
+| `sudo usermod -d /home/new_username new_username`         | Sets `/home/new_username` as home directory for user `new_username`. (It does not automatically create the directory or move the files)                             |
+| `sudo usermod -d /home/new_username -m new_username`      | Sets `/home/new_username` as home directory for user `new_username`. (creates the directory if does not exist and move the files from old home dir to new home dir) |
+
+### Switch user
+| Commands       | Description                                     |
+|----------------|-------------------------------------------------|
+| `su user_name` | Switch user (from `current_user` to `user_name`)|
 
 <br>
 
