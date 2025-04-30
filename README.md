@@ -1009,14 +1009,18 @@ There are three types of users in Linux:
 | `sudo cat /etc/group`                  | Prints all groups                           |
 | `sudo addgroup group_name`             | Creates a new group `user_name`             |
 | `sudo usermod -aG group_name user_name`| Adds user `user_name` to group `group_name` |
+
+  > [!CAUTION]
+  > Not using append flag (`a`), will remove all other users from the group
+
+
+| Commands                               | Description                                 |
+|----------------------------------------|---------------------------------------------|
 | `sudo groupdel group_name`             | Deletes group `group_name`                  |
 | `groups user_name`                     | Displays all groups to which a user belongs |
 | `getent group group_name`              | Display all users in group                  |
 | `grep group_name /etc/group`           | Display all users in group                  |
 
-
-  > [!CAUTION]
-  > Not using append flag (`a`), will remove all other users from the group
 
 ### Renaming user
 
