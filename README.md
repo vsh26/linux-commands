@@ -62,7 +62,7 @@ If you are beginner in Linux, and have only ever used Windows, do consider readi
   | `exit`              | exit as current user or close terminal                          |
   | `reboot`            | restart linux server                                            |
   | `shutdown`          | shutdown linux server                                           |
-  
+
 <br>
 
 ### 📌 `date` command
@@ -113,6 +113,8 @@ If you are beginner in Linux, and have only ever used Windows, do consider readi
 > [!Note]
 > - `-a`, `-l`, etc. are FLAGS. Flags are used to specify how a command should operate and what information it should display. We can use a single flag or combine multiple flags together in one command.
 
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
+  
 <br>
 
 ***
@@ -140,6 +142,8 @@ If you are beginner in Linux, and have only ever used Windows, do consider readi
 
 > [!Note]
 > - `-i` flag can be used with `cp` and `mv` to get a prompt before overwriting files
+
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
 <br>
 
@@ -386,6 +390,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   | `-n <N>`           | Limits the output to the first `<N>` matches.                            |
   | `-r <REGEX>`       | Searches using a regular expression.                                     |
 
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
+
 <br>
 
 ***
@@ -599,6 +605,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   | `truncate -s 100M file.txt` | set the size of `file.txt` to 100MB                     |
   | `echo "ABCDE" \| fold -w1`  | display following line in vertical line - ABCDE         |
 
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
+
 <br>
 
 ***
@@ -621,6 +629,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   | `script`            | record a terminal session (type `exit` to stop recording        |
   | `alias [name='command']`| create shortcuts for commands, valid only for that session, not permenant (useful for frequently used complex commands)|
   | `unalias name`      | removes alias `name`                                            | 
+
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
 <br>
 
@@ -646,6 +656,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   | `unzip myfiles.zip` | extracts all files from `myfiles.zip` into the current directory|
   | `unzip -l myfiles.zip` | lists the contents of `myfiles.zip` without extracting the files|
 
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
+
 <br>
 
 ***
@@ -661,6 +673,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   | `wget [URL]`        | downloads file from specified url to current directory          |
   | `wget -O name [URL]`| downloads file from specified url and saves it as `name`        |
   | `curl [URL]`        | call API on linux (used for transferring data to or from a server using various protocols)|
+
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
 <br>
 
@@ -699,6 +713,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   | `yum list available`| list available packages to install                              |
   | `dnf list available`| list available packages to install                              |
 
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
+
 <br>
 
 ***
@@ -715,6 +731,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   | `systemctl start service-name` | starts the specified service                         |
   | `systemctl stop service-name`  | stops the specified service                          |
   | `systemctl list-units --type=service --all` | list all services and their current statuses|
+
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
 <br>
 
@@ -748,6 +766,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   - Delete or comment out the line and save the file
   - Reload configuration file using `source ~/.bashrc`
 
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
+
 <br>
 
 ***
@@ -766,6 +786,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   | `ssh user@example.com "ls -l /var/www"` | running command on a remote host            |
   | `scp [OPTIONS] [SOURCE] [DESTINATION]` | Secure Copy ( copy files or directories securely between a local and a remote system, or between two remote systems) |
   | `scp file.txt user@hostname:/path/to/destination` | copying files to/from remote host |
+
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
 <br>
 
@@ -904,6 +926,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   | `chown -R username:groupname directory/`| change ownership for a directory and all its contents|
   | `chown --reference=source_file target_file`| set ownership to match another file      |
 
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
+
 <br>
 
 ***
@@ -920,6 +944,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   | `top `              | check % memory and CPU utilization                              |
   | `du`                | check disk utilization                                          |
   | `df`                | check filesystem available and disk space allocated             |
+
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
 <br>
 
@@ -938,6 +964,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   | `arch`              | check type of architectureof your linux server                  |
   | `lsblk`             | see list of storage devices, disk partition on your linux server|
   | `uname -a `         | see OS name of linux server                                     |
+
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
 <br>
 
@@ -967,6 +995,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   | `at`                | schedule a script to run on a particular date/time              |
   | `crontab`           | schedule a script to run on a particular date/time              |
 
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
+
 <br>
 
 ***
@@ -984,6 +1014,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   | `telnet IP Port`    | check if a IP:PORT is accessible and open or not                |
   | `netstat -putan \| grep 80` | check if port is open or not on our server              |
   | `traceroute`        | check all hubs in network path to reach a website               |
+
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
 <br>
 
@@ -1080,6 +1112,8 @@ There are three types of users in Linux:
 |----------------|-------------------------------------------------|
 | `su user_name` | Switch user (from `current_user` to `user_name`)|
 
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
+
 <br>
 
 ***
@@ -1159,6 +1193,8 @@ There are three types of users in Linux:
 > [!NOTE]
 > - Wildcard are not commands themselves, but are used with other linux commands such as `ls`, `cp`, `rm`, `mv`, `find`, etc.
 > - Wildcards match filenames and directory names; they do not search within file content.
+
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
 ## 📬 Connect with Me  
   
