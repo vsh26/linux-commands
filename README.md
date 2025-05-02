@@ -3,7 +3,49 @@
 If you are beginner in Linux, and have only ever used Windows, do consider reading the following articles, before directly jumping upon the commands, to understand the Linux better.
 - [Exploring Linux: Its Origins, Why It’s Different, and How It Compares to Windows and macOS](https://controlplusblog.hashnode.dev/exploring-linux-its-origins-why-its-different-and-how-it-compares-to-windows-and-macos)
 - [Why the Juice Seller at MacOS Gets the Order of a Linux User, But Windows Looks Confused](https://controlplusblog.hashnode.dev/why-the-juice-seller-at-macos-gets-the-order-of-a-linux-user-but-windows-looks-confused)
- 
+
+<br>
+
+## ☰ Table of Contents
+* [Some basic commands](#-some-basic-commands) - `pwd`, `whoami`, `clear`, `su`,  `exit`, `reboot`, `shutdown`, `date`, `ls`
+* [Working with directories](#-working-with-directories) - `mkdir`, `rmdir`, `cd`, `cp`, `mv`
+* [Working with files](#-working-with-files)
+  + [Reading files](#1%EF%B8%8F⃣-reading-files) - `cat`, `tac`, `less`, `more`, `head`, `tail`
+  + [Creating files](#2%EF%B8%8F⃣-creating-files) - `touch`
+  + [Deleting files](#3%EF%B8%8F⃣-deleting-files) - `rm`
+  + [Editing files](#4%EF%B8%8F⃣-editing-files) - `vi`, `nano`
+  + [Dividing file into smaller sections](#5%EF%B8%8F⃣-dividing-file-into-smaller-sections) - `split`
+  + [Comparing files](#6%EF%B8%8F⃣-comparing-files) - `cmp`, `diff`
+  + [Finding files](#7%EF%B8%8F⃣-finding-files) - `find`, `locate`
+* [Operations on file contents](#-operations-on-file-contents)
+  + [Sorting the file content](#1%EF%B8%8F⃣-sorting-the-file-content) - `sort`
+  + [Finding unique](#2%EF%B8%8F⃣-finding-unique) - `uniq`
+  + [Searching the content](#3%EF%B8%8F⃣-searching-the-content) - `grep`, `egrep`
+  + [Shuffle content](#4%EF%B8%8F⃣-shuffle-content) - `shuf`
+  + [Word count](#5%EF%B8%8F⃣-word-count) - `wc`
+  + [String operation command](#6%EF%B8%8F⃣-string-operation-command) - `awk`, `cut`, `sed`, `tr`, `truncate`, `echo`
+* [Utility Commands](#-utility-commands) - `history`, `man`, `which`, `bc`, `calc`, `uptime`, `script`, `alias`, `unalias`
+* [Zip and unzip files and folders](#%EF%B8%8F-zip-and-unzip-files-and-folders) - `gzip`, `gunzip`, `tar`, `zip`, `unzip`
+* [Downloading files from internet](#-downloading-files-from-internet) - `wget`, `curl`
+* [Software package management](#-software-package-management)
+  + [Debian-based distributions](#1%EF%B8%8F⃣-debian-based-distributions) - `apt`, `dpkg`
+  + [RPM (RedHat Package Manager)-based distributions](#2%EF%B8%8F⃣-rpm-redhat-package-manager-based-distributions) - `yum`, `dnf`, `rpm`
+* [Service management](#%EF%B8%8F-service-management) - `systemctl`
+* [Environment variables](#-environment-variables) - `printenv`, `unset`, `source`
+* [Working with remote servers](#-working-with-remote-servers) - `ssh`, `scp`
+* [Working with permissions](#%EF%B8%8F-working-with-permissions) - `chmod`, `chown`
+* [Memory info](#-memory-info) - `free`, `top`, `du`, `df`
+* [System info](#%EF%B8%8F-system-info) - `hostname`, `lscpu`, `arch`, `lsbsk`, `uname`
+* [Process Management](#%EF%B8%8F-process-management) - `ps`, `pgrep`, `kill`, `pkill`, `jobs`, `bg`, `fg`, `nohup`, `at`, `crontab`
+* [Networking](#-networking) - `ifconfig`, `ping`, `telnet`, `netstat`, `traceroute`
+* [User Management](#-user-management)
+  + [Adding user](#adding-user) - `useradd`, `adduser`
+  + [Delete user](#delete-user) - `userdel`
+  + [Group management](#group-management) - `addgroup`, `groupmod`, `groupdel`
+  + [Renaming user](#renaming-user) - `usermod`
+  + [Switch user](#switch-user) - `su`
+* [Wildcards](#-wildcards) - `*`, `?`, `[ ]`, `[^ ]`, `{ }`
+
 <br>
 
 ## 🔧 Some basic commands
