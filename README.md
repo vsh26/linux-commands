@@ -776,6 +776,8 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
 
 ## 🌐 Working with remote servers
 
+Read this article, [Mastering SSH: Secure Remote Access with Keys and Configurations](https://controlplusblog.hashnode.dev/mastering-ssh-secure-remote-access-with-keys-and-configurations), to learn more about SSH.
+
 <br>
 
   | Examples            | Description                                                     |
