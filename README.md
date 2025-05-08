@@ -1114,6 +1114,17 @@ There are three types of users in Linux:
 |----------------|-------------------------------------------------|
 | `su user_name` | Switch user (from `current_user` to `user_name`)|
 
+### `sudo`
+Not every user can use `sudo` to do any task. The user has to be in the `sudoers` file (`etc/sudoers`).
+
+| Commands                                                  | Description                                                                                                                                                         |
+|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `sudo usermod -aG sudo new_user`                          | Adds user `new_user` to group `sudo`. This will allow `new_user` to run commands with `sudo`. (It means `new_user` now has administrative privileges)               |
+| `sudo cat /etc/sudoers`                                   | Display the content of `sudoers` file, which is a system file used to configure sudo privileges for users.                                                          |
+| `sudo visudo`                                             | Opens the `sudoers` file in the default editor and performs syntax validation before saving, preventing potential misconfigurations.                                  |
+
+
+
 <p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
 <br>
