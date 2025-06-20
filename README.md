@@ -34,6 +34,10 @@ If you are beginner in Linux, and have only ever used Windows, do consider readi
 * [Environment variables](#-environment-variables) - `printenv`, `unset`, `source`
 * [Working with remote servers](#-working-with-remote-servers) - `ssh`, `scp`
 * [Linux file system](#%EF%B8%8F-linux-file-system)
+  + [What is "Root directory (`/`)"?](#what-is-root-directory-)
+  + [Important sub-directories under root directory](#important-sub-directories-under-root-directory) - `/bin`, `/sbin`, `/boot`, `/dev`, `/etc`, `home`, `lib`, `lib64`, etc.
+  + [Why do we see `/bin -> /usr/bin`, `/sbin -> /usr/sbin`, `/lib -> /usr/lib`, `/lib64 -> /usr/lib64` on modern systems?](#why-do-we-see-bin---usrbin-sbin---usrsbin-lib---usrlib-lib64---usrlib64-on-modern-systems)
+  + [What is `usr.is.merged?`](#what-is-usrismerged)
 * [Working with permissions](#%EF%B8%8F-working-with-permissions) - `chmod`, `chown`
 * [Memory info](#-memory-info) - `free`, `top`, `du`, `df`
 * [System info](#%EF%B8%8F-system-info) - `hostname`, `lscpu`, `arch`, `lsbsk`, `uname`
@@ -1410,6 +1414,7 @@ Not every user can use `sudo` to do any task. The user has to be in the `sudoers
 [![X](https://img.shields.io/badge/X-%23000000.svg?logo=X&logoColor=white)](https://twitter.com/VishalKapgate)
 [![Gmail](https://img.shields.io/badge/Gmail-D14836?logo=gmail&logoColor=white)](mailto:vishaldk26@gmail.com)
 [![LinkedIn](https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff)](https://linkedin.com/in/vishalkapgate)
+[![Peerlist](https://img.shields.io/badge/-Peerlist-00AA45?style=flat&logo=peerlist&logoColor=white)](https://peerlist.io/vishalkapgate)
 
 </div>
 
