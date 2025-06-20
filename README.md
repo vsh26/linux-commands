@@ -33,6 +33,7 @@ If you are beginner in Linux, and have only ever used Windows, do consider readi
 * [Service management](#%EF%B8%8F-service-management) - `systemctl`
 * [Environment variables](#-environment-variables) - `printenv`, `unset`, `source`
 * [Working with remote servers](#-working-with-remote-servers) - `ssh`, `scp`
+* [Linux file system](#%EF%B8%8F-linux-file-system)
 * [Working with permissions](#%EF%B8%8F-working-with-permissions) - `chmod`, `chown`
 * [Memory info](#-memory-info) - `free`, `top`, `du`, `df`
 * [System info](#%EF%B8%8F-system-info) - `hostname`, `lscpu`, `arch`, `lsbsk`, `uname`
@@ -795,6 +796,199 @@ Read this article, [Mastering SSH: Secure Remote Access with Keys and Configurat
 
 ***
 
+<br>
+
+## 🗂️ Linux file system
+
+<br>
+
+The Linux File System is how data is stored, accessed, and managed on a Linux system. `ext4` (fourth extended file system) is the most commonly used file system in Linux.
+- We install Linux onto a partition which is formatted as `ext4`
+- Then the partition is mounted at `/` — making it the **root filesystem**
+- Linux follows a tree-like hierarchical structure, starting from a root directory `/`, and branching into various subdirectories.
+
+**"In Linux, everything is a file."**
+- Every resource—files, directories, devices, sockets, pipes, and even processes—is treated as a file or file-like object.
+- This simplifies how the system interacts with various components — by using a **common interface**: file descriptors and read/write operations.
+
+### What is "Root directory (`/`)"?
+- Top-most level of the Linux file system hierarchy
+- Starting point or base of the file system tree, from which all other directories and files branch out.
+- All directories and files are organized under it, no matter which physical disk they’re on.
+
+### Important sub-directories under root directory
+
+The Filesystem Hierarchy Standard (FHS) is followed by sub-directories, which is used by most modern Linux distributions.
+
+![image](https://github.com/user-attachments/assets/aacfbcea-1b28-41b8-a46f-d64ea3427b85)
+
+- **`/bin`**
+  - `/bin` stands for “binary”
+  - It is a directory that contains user-essential binary executables (compiled programs) for core commands, needed for basic system operation — even in single-user mode or during system recovery.
+  - These can be used by all users
+  - Commands/ Tools: `ls`, `cp`, `mv`, `rm`, `mkdir`, `cat`, `bash`, etc.
+    
+- **`/sbin`**
+  - `/sbin` stands for "system binaries"
+  - It contains binary executables (compiled programs) that are used for system maintenance, repair, booting, and administration.
+  - They are mostly used by `root` users
+  - Commands/ Tools: `mount`, `fsck`, `reboot`, `shutdown`, `ifconfig`, `ip`, `init`, `modprobe`, `fdisk`, `mkfs`
+ 
+- **`/boot`**
+  - `/boot` is a directory that contains all the files needed to boot your Linux system, before the actual operating system (kernel + userland) is running.
+  - It's separate from the rest of the Linux system because:
+    - It needs to be accessible very early during boot
+    - The system doesn’t yet load file systems like `/home` or `/usr` at that point
+    - It may use simpler filesystems (like ext4) for compatibility
+  - ⚠️ Avoid editing files here — a mistake can make your system unbootable.
+    
+- **`/dev`**
+  - `/dev` contains special files called “device files” that represent hardware devices and virtual devices on your system.
+  - These are not regular files or binaries — they are interfaces to hardware managed by the kernel.
+  - Most files are dynamically created and managed by:
+    - The Kernel
+    - The `udev` device manager
+  - We can even read/write to these files to communicate with hardware.
+  - There are two main types of files in `/dev`:
+    - Character devices (`c`) - Data flows one character at a time (like keyboards, serial ports)
+    - Block devices (`b`) - Data is transferred in blocks (like HDDs, SSDs, USBs)
+
+- **`/etc`**
+  - `/etc` contains system-wide configuration files and directories for the Linux operating system and installed software.
+  - It contains configuration files for:
+    - The system itself (hostname, users, networking)
+    - Installed services and daemons (like SSH, Apache, cron)
+    - Startup scripts and init system configs
+
+- **`/home`**
+  - `/home` is the directory where all regular users’ personal data and settings are stored.
+  - Each user has a subdirectory under `/home` — this is their home directory.
+  - Regular users own their home directories and can read/write inside.
+  - Other users cannot access each other’s home dirs by default.
+  - Admins (`root`) can access all of them.
+  - On some systems (like servers), `/home` may be on a separate partition or disk to isolate user data.
+
+- **`/lib`**
+  - `/lib` contains shared libraries needed by the essential binaries in `/bin` and `/sbin`.
+  - A library is a collection of code (functions, routines) that many programs can share, rather than duplicating that code inside each binary. These are like the "helper files" that programs rely on to run.
+  - Types:
+    - Shared libraries (`.so` → shared object)
+    - Static libraries (`.a` → archive, less common in `/lib`)
+  - What's typically inside `/lib`:
+    - Low-level C standard libraries
+    - Math, memory, and I/O functions
+    - Dynamic linker/loader
+    
+- **`/lib64`**
+  - `/lib64` contains `64-bit` shared libraries — specifically, essential `64-bit` system libraries needed by `64-bit` binaries in `/bin` and `/sbin`.
+  - On 64-bit Linux systems:
+    - 64-bit binaries expect their shared libraries in /lib64
+    - 32-bit binaries (if supported) expect them in /lib
+  -  Without this separation, a 32-bit and 64-bit version of the same library would overwrite each other.
+
+- **`/lost+found`**
+  -`/lost+found` is a special directory created by the `ext4`, `ext3`, and `ext2` file systems to store "orphaned files", after filesystem corruption or unexpected shutdowns, if found during a disk check (`fsck`).
+  - The file system repair tool (`fsck`) may find blocks of data that don’t belong to any known file or directory. Instead of discarding them, it stores them in `/lost+found`.
+  - It is empty most of the time.
+  - If not empty: files with numeric names like `#12345` — these are recovered inode references, not real filenames.
+  - You may need to manually inspect the contents (with `file`, `strings`, or `cat`) to understand what was recovered.
+  
+- **`/media`**
+  - `/media` is the standard mount point for removable media (mostly plug-and-play devices), such as USB drives, CDs/DVDs, SD cards, external hard disks, etc.
+  - Mount point is a directory where the connection with main filesystem tree happens.
+  - Linux automatically mounts external devices when you plug them in.
+
+- **`/mnt`**
+  - `/mnt` is a standard directory used as a temporary mount point for manually mounting file systems — such as internal partitions, ISO images, NFS shares, and other storage devices.
+  - Unlike `/media`, it is not automatically managed.
+  - It’s meant for system administrators or advanced users to mount devices or file systems manually.
+    
+- **`/opt`**
+  - `/opt` stands for “optional” — it is used to install third-party software packages that aren’t part of the default Linux distribution.
+  - Think of it as a place for manually installed, large applications that live outside the package manager (like `apt`, `dnf`, or `pacman`).
+  - You install software into `/opt` when:
+    - It's a standalone app (like a full GUI application or a development tool)
+    - You're not using the package manager (e.g., installing from a `.tar.gz` or `.run` file)
+    - You want to keep it separate from system-managed packages
+  - Each package usually lives in its own subdirectory under /opt.
+
+- **`/proc`**
+  - `/proc` is a virtual filesystem that provides a real-time interface to the Linux kernel.
+  - It shows live information about your system, hardware, processes, and kernel internals — all in the form of files and directories.
+  - It’s mounted automatically at boot and doesn’t occupy real disk space.
+  - Everything inside is generated on-the-fly by the kernel.
+  - Exa: `cpuinfo`, `meminfo`, etc.
+
+- **`/root`**
+  - `/root` is the home directory of the `root` (superuser) account on a Linux system.
+  - Why doesn’t home directory for root user live in `/home/root`?
+    - `/home` might be on a separate partition, and that partition might not be mounted early during boot.
+    - The root user must always have access to their home directory — especially during rescue or maintenance mode.
+
+- **`/run`**
+  - `/run` is a temporary, RAM-based filesystem used to store system information and runtime data — like PIDs, sockets, and lock files — that are created and used while the system is running.
+  - It is cleared on reboot
+    
+- **`/snap`**
+  - `/snap` is the mount point for installed Snap packages. (When a software is installed via Snap, the actual application gets mounted inside `/snap`)
+  
+- **`/srv`**
+  - `/srv` stands for "service" — it is intended to store data served by the system’s network services, such as:
+    - Web servers (e.g., Apache, Nginx)
+    - FTP servers
+    - File sharing (e.g., NFS, Samba)
+    - Other hosted content
+  - It holds service-specific data (content of the program to be served), not the programs themselves.
+  - Linux does not populate `/srv` by default. It’s up to the system admin or the application to place content there if following FHS standards.
+    
+- **`/sys`**
+  - `/sys` is a virtual filesystem (called sysfs) that exposes information and control interfaces for the Linux kernel.
+  - It provides a live view of hardware devices and kernel subsystems — and sometimes allows you to modify them.
+  - Purpose of `sys`:
+    - Read hardware information (devices, buses, drivers)
+    - Change kernel parameters (within limits)
+    - Debug and monitor hardware status
+    - Communicate with the kernel about system settings
+      
+- **`/tmp`**
+  - `/tmp` is a directory for storing temporary files created by programs and users.
+  - It’s meant for:
+    - Short-lived data
+    - Scratch space for apps
+    - Files that don’t need to persist across reboots
+  - It is writable by all users, but files are automatically deleted after some time — usually on reboot or after a timeout set by the system.
+    
+- **`/usr`**
+  - `/usr` stands for “Unix System Resources” — despite sounding like it’s just for "user files", it's not for personal user data.
+  - Instead, `/usr` contains read-only userland programs and data that are shared across the system.
+  - It's basically a second root (`/`) — for all non-essential, multi-user system files.
+  - `/usr/bin` : contain non-essential user binaries (`gcc`, `python`, `git`, `node`, `curl`, etc.)
+  - `/usr/sbin` : contain non-essential system binaries (`sshd`, `apachectl`, `dpkg-reconfigure`, `useradd`, `passwd`, etc.)
+  - `/usr/lib` : contains shared libraries and internal binaries needed by the programs in `/usr/bin` and `/usr/sbin`.
+    
+- **`/var`**
+  - `/var` stands for "variable" and contains data that is expected to change over time — such as logs, caches, mail, spool files, and even package manager metadata.
+  - It is writable, unlike `/usr` or `/lib`, and is designed to store dynamic, growing data. 
+
+### Why do we see `/bin -> /usr/bin`, `/sbin -> /usr/sbin`, `/lib -> /usr/lib`, `/lib64 -> /usr/lib64` on modern systems?
+
+**Symbolic Link/ Symlink/ Soft Link:** A special file that acts as a shortcut or pointer to another file or directory.
+
+In modern Linux systems (especially Ubuntu, Fedora, Arch, etc.), there's a file system simplification effort to merge:
+- `/bin` into `/usr/bin`
+- `/sbin` into `/usr/sbin`
+- `/lib` into `/usr/lib`
+- `lib64` into `/usr/lib64`
+But for backward compatibility, the `/bin`, `sbin`, `lib`, `lib64` names still exists (as symlink).
+
+### What is `usr.is.merged`?
+It is a marker file used by the system to indicate that this system uses the modern merged `/usr` filesystem layout.
+
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
+
+<br>
+
+***
 <br>
 
 ## 🛡️ Working with permissions
