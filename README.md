@@ -39,6 +39,12 @@ If you are beginner in Linux, and have only ever used Windows, do consider readi
   + [Why do we see `/bin -> /usr/bin`, `/sbin -> /usr/sbin`, `/lib -> /usr/lib`, `/lib64 -> /usr/lib64` on modern systems?](#why-do-we-see-bin---usrbin-sbin---usrsbin-lib---usrlib-lib64---usrlib64-on-modern-systems)
   + [What is `usr.is.merged?`](#what-is-usrismerged)
 * [Working with permissions](#%EF%B8%8F-working-with-permissions) - `chmod`, `chown`
+  + [`chmod` Command](#-chmod-command)
+  + [`chown` Command](#-chown-command)
+  + [Default Permissions](#default-permissions)
+  + [What is `umask`?](#what-is-umask)
+  + [Special permission bits](#special-permission-bits)
+  + [ACL (Access Control List)](#acl-access-control-list)
 * [Memory info](#-memory-info) - `free`, `top`, `du`, `df`
 * [System info](#%EF%B8%8F-system-info) - `hostname`, `lscpu`, `arch`, `lsbsk`, `uname`
 * [Process Management](#%EF%B8%8F-process-management) - `ps`, `pgrep`, `kill`, `pkill`, `jobs`, `bg`, `fg`, `nohup`, `at`, `crontab`
@@ -811,14 +817,20 @@ The Linux File System is how data is stored, accessed, and managed on a Linux sy
 - Then the partition is mounted at `/` — making it the **root filesystem**
 - Linux follows a tree-like hierarchical structure, starting from a root directory `/`, and branching into various subdirectories.
 
+<br>
+
 **"In Linux, everything is a file."**
 - Every resource—files, directories, devices, sockets, pipes, and even processes—is treated as a file or file-like object.
 - This simplifies how the system interacts with various components — by using a **common interface**: file descriptors and read/write operations.
+
+<br>
 
 ### What is "Root directory (`/`)"?
 - Top-most level of the Linux file system hierarchy
 - Starting point or base of the file system tree, from which all other directories and files branch out.
 - All directories and files are organized under it, no matter which physical disk they’re on.
+
+<br>
 
 ### Important sub-directories under root directory
 
@@ -974,6 +986,8 @@ The Filesystem Hierarchy Standard (FHS) is followed by sub-directories, which is
   - `/var` stands for "variable" and contains data that is expected to change over time — such as logs, caches, mail, spool files, and even package manager metadata.
   - It is writable, unlike `/usr` or `/lib`, and is designed to store dynamic, growing data. 
 
+<br>
+
 ### Why do we see `/bin -> /usr/bin`, `/sbin -> /usr/sbin`, `/lib -> /usr/lib`, `/lib64 -> /usr/lib64` on modern systems?
 
 **Symbolic Link/ Symlink/ Soft Link:** A special file that acts as a shortcut or pointer to another file or directory.
@@ -984,6 +998,8 @@ In modern Linux systems (especially Ubuntu, Fedora, Arch, etc.), there's a file 
 - `/lib` into `/usr/lib`
 - `lib64` into `/usr/lib64`
 But for backward compatibility, the `/bin`, `sbin`, `lib`, `lib64` names still exists (as symlink).
+
+<br>
 
 ### What is `usr.is.merged`?
 It is a marker file used by the system to indicate that this system uses the modern merged `/usr` filesystem layout.
