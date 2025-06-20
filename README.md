@@ -999,6 +999,8 @@ It is a marker file used by the system to indicate that this system uses the mod
 
 <br>
 
+![image](https://github.com/user-attachments/assets/e6a7a340-4815-4fea-8b2a-520e5634ba7d)
+
 * File permissions in Linux control who can read, write, or execute files and directories. Permissions are assigned to three categories of users:
 
   - **Owner:** The user who owns the file.
@@ -1013,15 +1015,20 @@ It is a marker file used by the system to indicate that this system uses the mod
       - `c` : Character device
       - `b` : Block device
      
-    2. **Permissions:** Next 9 characters, divided into groups of three
-        - **Owner (`rwx`):** The file owner can read (`r`), write (`w`), and execute (`x`).
-        - **Group (`r-x`):** Members of the group can read (`r`) and execute (`x`), but not write.
-        - **Others (`r--`):** All other users can only read (`r`).
-
+  2. **Permissions:** Next 9 characters, divided into groups of three. Each group specify the permissions for Owner, Group and Others respectively.
+     
 * Breakdown of each permission:
   - `r` (read): Permission to read the file or list directory contents.
   - `w` (write): Permission to modify the file or add/remove files in a directory.
   - `x` (execute): Permission to run the file as a program or enter a directory.
+
+  ![image](https://github.com/user-attachments/assets/fc4054ef-574d-4047-bc19-3c2922f3bdcb)
+
+* Exa: `-rwxr-xr--` means:
+  - **File type (-):** Regular file
+  - **Owner (`rwx`):** The file owner can read (`r`), write (`w`), and execute (`x`).
+  - **Group (`r-x`):** Members of the group can read (`r`) and execute (`x`), but not write.
+  - **Others (`r--`):** All other users can only read (`r`).
 
 <br>
 
@@ -1058,14 +1065,23 @@ It is a marker file used by the system to indicate that this system uses the mod
 <br>
 
 - 2️⃣ **Using Numeric (Octal) mode**
+
+![image](https://github.com/user-attachments/assets/86eea5be-a206-4644-975f-31330824f157)
+
+<br>
+
+  - Structure of octal permissions: Permissions are written as three digits, where each digit corresponds to a specific category:
+    - First digit: Owner
+    - Second digit: Group
+    - Third digit: Others
+
   - Permissions are represented by three bits:
     - `r` (read) = 4
     - `w` (write) = 2
     - `x` (execute) = 1
-  - The total value for a permission set is the sum of these numbers:
+      
+  - The total value for a permission set is the **sum** of these numbers:
 
-  <br>
-  
     | Permission | Value | Meaning            |
     |------------|-------|--------------------|
     | `---`      | 0     | No permissions     |
@@ -1077,35 +1093,24 @@ It is a marker file used by the system to indicate that this system uses the mod
     | `rw-`      | 6     | Read and write     |
     | `rwx`      | 7     | Read, write, and execute |
 
-<br>
-
-  - Structure of octal permissions: Permissions are written as three digits, where each digit corresponds to a specific category:
-    - First digit: Owner
-    - Second digit: Group
-    - Third digit: Others
-
-  <br>
-  
-  | Examples            | Description                                                     |
-  |-----------          |-------------                                                    |
-  | `chmod 744 file.txt`| Full permissions for the owner, and read-only for others        |
-  | `chmod 666 file.txt`| Read and write permissions for everyone                         |
-  | `chmod 751 file.txt`| Owner has full permissions, group has read/execute, others have execute only|
-  | `chmod 750 file.txt`| No permissions for others                                       |
+    | Examples            | Description                                                     |
+    |-----------          |-------------                                                    |
+    | `chmod 744 file.txt`| Full permissions for the owner, and read-only for others        |
+    | `chmod 666 file.txt`| Read and write permissions for everyone                         |
+    | `chmod 751 file.txt`| Owner has full permissions, group has read/execute, others have execute only|
+    | `chmod 750 file.txt`| No permissions for others                                       |
 
   <br>
  
-  - **Quick reference table:**
-
-  <br>
-  
-  | Octal   | Owner | Group | Others |
-  |---------|-------|-------|--------|
-  | `777`   | rwx   | rwx   | rwx    |
-  | `755`   | rwx   | r-x   | r-x    |
-  | `644`   | rw-   | r--   | r--    |
-  | `700`   | rwx   | ---   | ---    |
-  | `600`   | rw-   | ---   | ---    |
+  - **Examples:**
+    
+    | Octal   | Owner | Group | Others |
+    |---------|-------|-------|--------|
+    | `777`   | rwx   | rwx   | rwx    |
+    | `755`   | rwx   | r-x   | r-x    |
+    | `644`   | rw-   | r--   | r--    |
+    | `700`   | rwx   | ---   | ---    |
+    | `600`   | rw-   | ---   | ---    |
 
 <br>
 
@@ -1115,16 +1120,113 @@ It is a marker file used by the system to indicate that this system uses the mod
   - **OWNER:** The new owner (user) of the file/directory.
   - **GROUP:** The new group of the file/directory. Specifying :GROUP is optional.
   - **FILE:** The file or directory whose ownership is being changed.
+    
+    | Examples            | Description                                                     |
+    |-----------          |-------------                                                    |
+    | `chown user file.txt`| sets `user` as the owner of file.txt                           |
+    | `chown username:groupname file.txt` | sets `username` as the owner and `groupname` as the group|
+    | `chown :groupname file.txt`| change the group only                                    |
+    | `chown -R username:groupname directory/`| change ownership for a directory and all its contents|
+    | `chown --reference=source_file target_file`| set ownership to match another file      |
 
- <br>
- 
-  | Examples            | Description                                                     |
-  |-----------          |-------------                                                    |
-  | `chown user file.txt`| sets `user` as the owner of file.txt                           |
-  | `chown username:groupname file.txt` | sets `username` as the owner and `groupname` as the group|
-  | `chown :groupname file.txt`| change the group only                                    |
-  | `chown -R username:groupname directory/`| change ownership for a directory and all its contents|
-  | `chown --reference=source_file target_file`| set ownership to match another file      |
+  <br>
+
+### Default permissions
+- When a file or directory is created in Linux, it is given default permissions based on:
+  - The type of object (file or directory)
+  - The user’s umask value
+
+<br>
+
+### What is `umask`?
+- `umask` (short for user file creation mask) is a setting in Linux/Unix systems that controls the default permissions given to newly created files and directories.
+- When a file or directory is created, Linux:
+  - Starts with a default maximum permission
+  - Files: `666` (`rw-rw-rw-`)
+  - Directories: `777` (`rwxrwxrwx`)
+- Subtracts the umask value from that default
+- The result becomes the actual permission
+  
+  ```
+  Final Permission = Default Permission - umask
+  ```
+  
+  | Type      | Default | Umask | Final Permission  |
+  |-----------|---------|-------|-------------------|
+  | File      | 666     | 022   | 644 (rw-r--r--)   |
+  | Directory | 777     | 022   | 755 (rwxr-xr-x)   |
+
+<br>
+
+- **Checking current `umask ` value**
+  ```
+  umask
+
+- **Changing `umask` value**
+  - Temporary (Current shell session):
+    
+    ```
+    umask 027
+    
+  - Permanent: Edit your shell config file (`~/.bashrc`, `~/.zshrc`, etc.)
+    
+    ```
+    echo "umask 027" >> ~/.bashrc
+    source ~/.bashrc
+
+- **Common `umask` values and meanings:**
+  
+    | umask | File Permission | Dir Permission | Description                              |
+    | ----- | --------------- | -------------- | ---------------------------------------- |
+    | 022   | 644             | 755            | Default on most systems (world-readable) |
+    | 027   | 640             | 750            | More secure (no access for others)       |
+    | 077   | 600             | 700            | Private (owner-only access)              |
+
+  <br>
+
+### Special permission bits
+Linux provides three special permission bits in addition to the standard `rwx` (read, write, execute):
+
+  | Special Bit | Applies To   | Symbol                  | What It Does                                        |
+  | ----------- | ------------ | ----------------------- | --------------------------------------------------- |
+  | **SUID**    | Files        | `s` in user exec bit    | Run file as file **owner**                          |
+  | **SGID**    | Files & Dirs | `s` in group exec bit   | Run file as **group owner** OR inherit group in dir |
+  | **Sticky**  | Directories  | `t` in others' exec bit | Restrict deletion to file **owners only**           |
+
+1. **SUID (Set User ID)**
+  - When a **file with SUID** is executed, it runs as the **file’s owner**, not the user running it.
+  - Used for programs that need elevated privileges temporarily.
+
+2. **SGID (Set Group ID)**
+   - On files: When a user runs a file with SGID, it runs with the file’s group privileges.
+   - On directories: Files and directories created inside inherit the parent directory’s group, instead of the user’s default group.
+
+3. **Sticky Bit**
+   - The Sticky Bit is a special permission used only on directories, and it prevents users from deleting or renaming each other's files — even if they have write access to the directory.
+
+- Reading these in `ls -la`:
+  
+  | Output Example | Meaning                     |
+  | -------------- | --------------------------- |
+  | `-rwsr-xr-x`   | SUID set                    |
+  | `-rwxr-sr-x`   | SGID set on file            |
+  | `drwxr-sr-x`   | SGID set on directory       |
+  | `drwxrwxrwt`   | Sticky bit set on directory |
+
+> [!WARNING]  
+> SUID can be dangerous if misused — a buggy or malicious script with SUID could give root-level access. That's why:
+> - Never set SUID on scripts (.sh, .py) — only on binaries
+> - Be cautious which programs have SUID set (e.g., find / -perm -4000 lists all)
+
+<br>
+
+### ACL (Access Control List)
+- ACL (Access Control List) allows fine-grained control over who can access a file or directory — more than just one user, one group, and others.
+- With ACL, you can give multiple users and groups custom permissions on a single file or directory.
+
+> [!WARNING]  
+> ACLs provide powerful control, but can become complex and harder to audit. Use them when standard permissions are not enough — and document your ACL changes well.
+
 
 <p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
