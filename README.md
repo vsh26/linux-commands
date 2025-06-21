@@ -1203,11 +1203,13 @@ It is a marker file used by the system to indicate that this system uses the mod
 ### Special permission bits
 Linux provides three special permission bits in addition to the standard `rwx` (read, write, execute):
 
-  | Special Bit | Applies To   | Symbol                  | What It Does                                        |
-  | ----------- | ------------ | ----------------------- | --------------------------------------------------- |
-  | **SUID**    | Files        | `s` in user exec bit    | Run file as file **owner**                          |
-  | **SGID**    | Files & Dirs | `s` in group exec bit   | Run file as **group owner** OR inherit group in dir |
-  | **Sticky**  | Directories  | `t` in others' exec bit | Restrict deletion to file **owners only**           |
+  | Special Bit | Use On           | Purpose                                             | Symbol                        | Numeric |
+  | ----------  | ---------------- | --------------------------------------------------- | ----------------------------- | ------- |
+  | **SUID**    | Executable files | Run file as file **owner**                          | `rws` (`s` in user exec bit)  | `4`     |
+  | **SGID**    | Files & dirs     | Run file as **group owner** OR inherit group in dir | `rws` (`s` in group exec bit) | `2`     |
+  | **Sticky**  | Directories      | Restrict deletion to file **owners only**           | `t` (`t` in others' exec bit) | `1`     |
+
+***Special permission bits are added in front of the usual 3-digit mode***
 
 1. **SUID (Set User ID)**
   - When a **file with SUID** is executed, it runs as the **file’s owner**, not the user running it.
