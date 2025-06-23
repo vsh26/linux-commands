@@ -1455,6 +1455,22 @@ Not every user can use `sudo` to do any task. The user has to be in the `sudoers
 
 <br>
 
+Wildcards (also called globs) are special characters used by the shell (like Bash) to match patterns in filenames or strings. They're mainly used in filename expansion, searching, and command-line automation.
+
+<br>
+
+| Wildcard             | Meaning                                           | Example              | Matches                          |
+| -------------------- | ------------------------------------------------- | -------------------- | -------------------------------- |
+| `*`                  | Matches **zero or more characters**               | `ls *.txt`           | `a.txt`, `notes.txt`, `test.txt` |
+| `?`                  | Matches **exactly one character**                 | `ls ?.txt`           | `a.txt`, `b.txt`                 |
+| `[abc]`              | Matches **one character from the set**            | `ls file[12].txt`    | `file1.txt`, `file2.txt`         |
+| `[a-z]`              | Matches **one character in a range**              | `ls file[a-c].txt`   | `filea.txt`, `fileb.txt`         |
+| `[!abc]` or `[^abc]` | Matches **any char *not* in set**                 | `ls file[!3].txt`    | `file1.txt`, `file2.txt`         |
+| `{a,b}`              | **Brace expansion** (not a wildcard, but similar) | `echo {Mon,Tue}.log` | `Mon.log`, `Tue.log`             |
+
+
+<br>
+
 **1. `*` (Asterik):** Matches zero or more characters in a filename or string.
 
 <br>
@@ -1510,7 +1526,7 @@ Not every user can use `sudo` to do any task. The user has to be in the `sudoers
 
 <br>
 
-**5. `{ }` (Curly Braces):** Matches a comma-separated list of strings or patterns.
+**5. `{ }` (Brace Expansion - not a wildcard, but similar):** Matches a comma-separated list of strings or patterns.
 
 <br>
 
