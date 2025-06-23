@@ -24,7 +24,7 @@ If you are beginner in Linux, and have only ever used Windows, do consider readi
   + [Shuffle content](#4%EF%B8%8F⃣-shuffle-content) - `shuf`
   + [Word count](#5%EF%B8%8F⃣-word-count) - `wc`
   + [String operation command](#6%EF%B8%8F⃣-string-operation-command) - `awk`, `cut`, `sed`, `tr`, `truncate`, `echo`
-* [Utility Commands](#-utility-commands) - `history`, `man`, `which`, `bc`, `calc`, `uptime`, `script`, `alias`, `unalias`
+* [Utility Commands](#-utility-commands) - `history`, `!`, `man`, `which`, `whereis`, `bc`, `calc`, `uptime`, `script`, `alias`, `unalias`
 * [Zip and unzip files and folders](#%EF%B8%8F-zip-and-unzip-files-and-folders) - `gzip`, `gunzip`, `tar`, `zip`, `unzip`
 * [Downloading files from internet](#-downloading-files-from-internet) - `wget`, `curl`
 * [Software package management](#-software-package-management)
@@ -47,7 +47,7 @@ If you are beginner in Linux, and have only ever used Windows, do consider readi
   + [ACL (Access Control List)](#acl-access-control-list)
 * [Memory info](#-memory-info) - `free`, `top`, `du`, `df`
 * [System info](#%EF%B8%8F-system-info) - `hostname`, `lscpu`, `arch`, `lsbsk`, `uname`
-* [Process Management](#%EF%B8%8F-process-management) - `ps`, `pgrep`, `kill`, `pkill`, `jobs`, `bg`, `fg`, `nohup`, `at`, `crontab`
+* [Process Management](#%EF%B8%8F-process-management) - `ps`, `pgrep`, `kill`, `top`, `htop`, `pkill`, `jobs`, `bg`, `fg`, `nohup`, `at`, `crontab`
 * [Networking](#-networking) - `ifconfig`, `ping`, `telnet`, `netstat`, `traceroute`
 * [User Management](#-user-management)
   + [Adding user](#adding-user) - `useradd`, `adduser`
@@ -234,6 +234,7 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
   |-----------          |-------------                                                    |
   | `head -5 filename`     | display top 5 lines from `filename`                          |
   | `tail -5 filename`     | display last 5 lines from `filename`                         |
+  | `tail -f -5 filename`  | display last 5 lines from `filename` (real-time)             |
 
 <br>
 
@@ -636,18 +637,80 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
 
 <br>
 
-  | Examples            | Description                                                     |
-  |-----------          |-------------                                                    |
-  | `history`           | display previously used commands                                |
-  | `<command> --help`  | check syntax and options available for a command                |
-  | `man command`       | read or get more info about a command                           |
-  | `which command`     | check which executable is using for a command                   |
-  | `bc`                | binary calculator                                               |
-  | `cal`               | displays calendar                                               |
-  | `uptime`            | how long the system has been running, the number of active users, and the system load averages|
-  | `script`            | record a terminal session (type `exit` to stop recording        |
-  | `alias [name='command']`| create shortcuts for commands, valid only for that session, not permenant (useful for frequently used complex commands)|
-  | `unalias name`      | removes alias `name`                                            | 
+| Examples            | Description                                                     |
+|-----------          |-------------                                                    |
+| `uptime`            | how long the system has been running, the number of active users, and the system load averages|
+| `man <command>`     | read or get more info about a command                           |
+| `<command> --help`  | check syntax and options available for a command                |
+| `which <command/ program>` | loacte binary for a command or program |
+| `whereis <command/ program>` | locate binary, source code and `man` pages for command or program|
+| `bc`                | binary calculator                                               |
+| `cal`               | displays calendar                                               |
+| `script`            | record a terminal session (type `exit` to stop recording        |
+
+<br>
+
+### 📌 `history` command
+
+| Examples            | Description                                                     |
+|-----------          |-------------                                                    | 
+| `history`           | display previously used commands                                |
+| `history -c`           | clear current session history                                |
+| `history -w`           | write current history to history file (`.bash_history`)      |
+| `history -d <line_number>` | delete specific entry from history file by line number   |
+
+<br>
+
+> [!NOTE]  
+> - History is stroed in `.bash_history` file of the user's home directory.
+> - Don't delete the `.bash_history` file directly unless required (i.e., `rm ~/.bash_history`)
+
+> [!CAUTION]
+> Do not directly use API keys and passwords into commands as they are saved in history file and can be accessed.
+> 
+> Solution 1: `read -s -p "Enter API key: " API_KEY`
+> - `read` - read user input
+> - `-s` - silent mode (input not shown on screen)
+> - `-p` - display prompt message
+> - `API_KEY` - variable used to store the user input (temporary variable)
+> 
+> Solution 2: Give one blank space before writing command (command will not be saved in history)
+> This will only work if `$HISTCONTROL` (bash environment variable) has `ignorespace` in it.
+
+<br>
+
+### 📌 `alias` command
+| Examples            | Description                                                     |
+|-----------          |-------------                                                    | 
+| `alias name="command"`| create shortcuts for commands, valid only for current session |
+| `unalias name`      | removes alias `name`                                            |
+
+<br>
+
+> [!NOTE]  
+> For permenant changes, add alias to `.bashrc` file.
+> - It is a shell script file that runs automatically when we start a new terminal session
+> - `source ~/.bashrc` - reload bash file without restarting the current terminal session
+
+<br>
+
+**Example 1 (Temporary alias):**
+
+- ```
+  alias gac="git add . && git commit -m"
+- **Usage:** `gac "Commit message"`
+
+**Example 2 (Permanent alias):**
+- Open `.bashrc` file
+- Add the piece of code at the end of file
+- ```
+  gac(){
+    git add . && git commit -m "$*"
+  }
+- Reload file, `source ~/.bashrc`
+- **Usage:** `gac "Commit message"`
+
+
 
 <p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
@@ -1266,12 +1329,15 @@ Linux provides three special permission bits in addition to the standard `rwx` (
 
 <br>
 
-  | Examples            | Description                                                     |
-  |-----------          |-------------                                                    |
-  | `free`              | check free RAM space                                            |
-  | `top `              | check % memory and CPU utilization                              |
-  | `du`                | check disk utilization                                          |
-  | `df`                | check filesystem available and disk space allocated             |
+  | Examples            | Description                                                         |
+  |-----------          |-------------                                                        |
+  | `free`              | check free RAM space                                                |
+  | `free -h`           | check free RAM space (human-readable)                               |
+  | `top `              | check % memory and CPU utilization                                  |
+  | `du`                | check disk utilization                                              |
+  | `du -h`             | check disk utilization (human-readable)                             |
+  | `df`                | check filesystem available and disk space allocated                 |
+  | `df -h`             | check filesystem available and disk space allocated (human-readable)|
 
 <p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
@@ -1307,15 +1373,19 @@ Linux provides three special permission bits in addition to the standard `rwx` (
 
   | Examples            | Description                                                     |
   |-----------          |-------------                                                    |
+  | `ps`                | Process status                                                  |
+  | `ps aux`            | Process status (`a`: all processes, `u`: user-readble, `x`: background processes (those without terminal)|
   | `ps -ef`            | Show all running processes                                      |
   | `ps -ef \| grep java` | Check if a process(java) running or not                       | 
   | `ps -u`             | Show processes for the current user                             |
-  | `ps aux`            | Show all processes, including those without a terminal          |
   | `ps -p 1234`        | Display specific processes by PID                               |
   | `ps aux --sort=-%mem`| Sort processes by memory usage                                 |
   | `pgrep chron`       | Get PID of process `chron`                                      |
+  | `kill [PID]`        | stop a process by PID                                           |
   | `kill -9 [PID]`     | stop a process by PID (`-9` means forcefully)                   |
   | `pkill httpd`       | Stop a process by its name, here `httpd` service                |
+  | `top`               | Live, real-time view of system processes                        |
+  | `htop`              | Live, real-time view of system processes (more user-friendly)   |
   | `jobs`              | See all active jobs                                             |
   | `bg`                | Resume job in background                                        |
   | `fg`                | Resume job in foreground                                        |
