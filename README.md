@@ -1,4 +1,4 @@
-# 🛠️Linux Commands
+# 🛠️ Linux Commands
 
 If you are beginner in Linux, and have only ever used Windows, do consider reading the following articles, before directly jumping upon the commands, to understand the Linux better.
 - [Exploring Linux: Its Origins, Why It’s Different, and How It Compares to Windows and macOS](https://controlplusblog.hashnode.dev/exploring-linux-its-origins-why-its-different-and-how-it-compares-to-windows-and-macos)
@@ -31,7 +31,7 @@ If you are beginner in Linux, and have only ever used Windows, do consider readi
   + [Debian-based distributions](#1%EF%B8%8F⃣-debian-based-distributions) - `apt`, `dpkg`
   + [RPM (RedHat Package Manager)-based distributions](#2%EF%B8%8F⃣-rpm-redhat-package-manager-based-distributions) - `yum`, `dnf`, `rpm`
 * [Service management](#%EF%B8%8F-service-management) - `systemctl`
-* [Shell environment and Environment variables](#-environment-variables) - `printenv`, `unset`, `source`
+* [Shell environment and Environment variables](#-shell-environment-and-environment-variables) - `printenv`, `unset`, `source`
   + [Shell environment](#shell-environment)
   + [Environment variables](#environment-variable)
 * [Working with remote servers](#-working-with-remote-servers) - `ssh`, `scp`
