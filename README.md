@@ -55,6 +55,14 @@ If you are beginner in Linux, and have only ever used Windows, do consider readi
   + [Group management](#group-management) - `addgroup`, `groupmod`, `groupdel`
   + [Renaming user](#renaming-user) - `usermod`
   + [Switch user](#switch-user) - `su`
+* [Bash Shell Operators](#-bash-shell-operators)
+  + [Redirection Operators](#1-redirection-operators) - `>`, `>>`, `<`, `2>`, `2>>`, `&>`, `2>&1`, `<<<`
+  + [Pipes and Command Chaining](#2-pipes-and-command-chaining) - `|`, `||`, `&&`, `;`
+  + [Control Operators & Grouping](#3-control-operators--grouping) - `&`, `()`, `{}`
+  + [Command Substitution](#4-command-substitution) - `$(...)`, `` `...` ``
+  + [Arithmetic Operators](#5-arithmetic-operators) - `+`, `-`, `*`, `/`, `%`, `**`, `++`, `--`, `+=`, `-=`
+  + [Logical Operators](#6-logical-operators) - `!`, `-a`, `-o`, `&&`, `||`
+  + [Comparision Operators](#7-comparison-operators) - `==`, `!=`, `-eq`, `-ne`, `-lt`, `-gt`, `-z`, `-n`
 * [Wildcards](#-wildcards) - `*`, `?`, `[ ]`, `[^ ]`, `{ }`
 
 <br>
@@ -1442,6 +1450,110 @@ Not every user can use `sudo` to do any task. The user has to be in the `sudoers
 | `sudo visudo`                                             | Opens the `sudoers` file in the default editor and performs syntax validation before saving, preventing potential misconfigurations.                                  |
 
 
+
+<p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
+
+<br>
+
+***
+
+<br>
+
+## 📟 Bash Shell Operators
+
+Shell operators are symbols or keywords that let you:
+- Chain commands
+- Redirect input/output
+- Control flow
+- Work with variables and files
+
+
+### 1. Redirection Operators
+
+| Operator | Description                             | Example                             |
+|----------|-----------------------------------------|-------------------------------------|
+| `>`      | Redirect stdout (overwrite)             | `echo Hello > file.txt`             |
+| `>>`     | Redirect stdout (append)                | `echo World >> file.txt`            |
+| `<`      | Redirect stdin from file                | `cat < input.txt`                   |
+| `2>`     | Redirect stderr                         | `ls nonfile 2> error.log`           |
+| `2>>`    | Append stderr to file                   | `ls x 2>> err.log`                  |
+| `&>`     | Redirect stdout and stderr              | `command &> all.log`                |
+| `2>&1`   | Redirect stderr to stdout               | `command 2>&1 > combined.log`       |
+| `<<<`    | Here-string (send a string to stdin)    | `grep root <<< "root:x:0:0"`        |
+
+<br>
+
+### 2. Pipes and Command Chaining
+
+| Operator | Description                                    | Example                               |
+|----------|------------------------------------------------|----------------------------------------|
+| `\|`      | Pipe output of one command to another           | `ls \| grep ".txt"`                     |
+| `\|\|`     | Run second command **only if first fails**      | `mkdir folder \|\| echo "Failed"`       |
+| `&&`     | Run second command **only if first succeeds**   | `make && echo "Build success"`        |
+| `;`      | Run multiple commands sequentially              | `echo A ; echo B`                     |
+
+<br>
+
+### 3. Control Operators & Grouping
+
+| Operator | Description                                    | Example                                 |
+|----------|------------------------------------------------|------------------------------------------|
+| `&`      | Run command in background                      | `sleep 10 &`                             |
+| `()`     | Run grouped commands in **subshell**           | `(cd /tmp && ls)`                        |
+| `{}`     | Group commands in **current shell**            | `{ echo one; echo two; }`               |
+
+<br>
+
+### 4. Command Substitution
+
+| Operator  | Description                                      | Example                            |
+|-----------|--------------------------------------------------|------------------------------------|
+| `$(...)`  | Run command and insert its output                | `echo "Today is $(date)"`          |
+| `` `...` `` | Old syntax (use `$(...)` instead)             | `` echo `date` ``                  |
+
+<br>
+
+### 5. Arithmetic Operators
+
+Used within `(( ))`, `let`, or `[[ ]]`.
+
+| Operator | Description        | Example                          |
+|----------|--------------------|----------------------------------|
+| `+ - * / %` | Basic arithmetic  | `echo $((5 + 3))`                |
+| `**`     | Exponentiation     | `echo $((2**3))`                 |
+| `++ --`  | Increment/Decrement | `((x++))`                        |
+| `+= -=`  | Compound assignment | `((x+=5))`                       |
+
+<br>
+
+### 6. Logical Operators
+
+| Operator | Description              | Example                            |
+|----------|--------------------------|------------------------------------|
+| `!`      | NOT                      | `[[ ! -f file.txt ]]`              |
+| `-a`     | AND (legacy)            | `[[ -f a -a -r a ]]`               |
+| `-o`     | OR (legacy)             | `[[ -f a -o -f b ]]`               |
+| `&&`     | AND (modern)            | `[[ -f a && -r a ]]`               |
+| `\|\|`     | OR (modern)             | `[[ -f a \|\| -f b ]]`               |
+
+<br>
+
+### 7. Comparison Operators
+
+| Operator | Description               | Example                         |
+|----------|---------------------------|---------------------------------|
+| `==`     | Strings equal             | `[[ "$a" == "$b" ]]`            |
+| `!=`     | Strings not equal         | `[[ "$a" != "$b" ]]`            |
+| `-eq`    | Equal (numeric)           | `[[ $a -eq $b ]]`               |
+| `-ne`    | Not equal (numeric)       | `[[ $a -ne $b ]]`               |
+| `-lt`    | Less than (numeric)       | `[[ $a -lt $b ]]`               |
+| `-gt`    | Greater than (numeric)    | `[[ $a -gt $b ]]`               |
+| `-z`     | String is empty           | `[[ -z "$a" ]]`                 |
+| `-n`     | String is not empty       | `[[ -n "$a" ]]`                 |
+
+<br>
+
+To learn more about each operator: `man bash`
 
 <p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
