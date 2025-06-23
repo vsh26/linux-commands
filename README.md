@@ -31,7 +31,9 @@ If you are beginner in Linux, and have only ever used Windows, do consider readi
   + [Debian-based distributions](#1%EF%B8%8F⃣-debian-based-distributions) - `apt`, `dpkg`
   + [RPM (RedHat Package Manager)-based distributions](#2%EF%B8%8F⃣-rpm-redhat-package-manager-based-distributions) - `yum`, `dnf`, `rpm`
 * [Service management](#%EF%B8%8F-service-management) - `systemctl`
-* [Environment variables](#-environment-variables) - `printenv`, `unset`, `source`
+* [Shell environment and Environment variables](#-environment-variables) - `printenv`, `unset`, `source`
+  + [Shell environment](#shell-environment)
+  + [Environment variables](#environment-variable)
 * [Working with remote servers](#-working-with-remote-servers) - `ssh`, `scp`
 * [Linux file system](#%EF%B8%8F-linux-file-system)
   + [What is "Root directory (`/`)"?](#what-is-root-directory-)
@@ -822,9 +824,70 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
 
 <br>
 
-## 🧮 Environment variables
+## 🧮 Shell environment and Environment variables
+
+### Shell environment
+The **shell environment** is the collection of settings, environment variables, functions, and configurations that the shell loads and uses when it starts.
+
+**Components of shell environment**
+| Component                 | Description                                        |
+| ------------------------- | -------------------------------------------------- |
+| **Environment Variables** | Variables like `PATH`, `HOME`, `USER`, `JAVA_HOME` |
+| **Aliases**               | Shortcuts for commands (e.g., `alias ll='ls -l'`)  |
+| **Functions**             | Custom mini-scripts                                |
+| **Prompt settings**       | How your terminal looks (`PS1`)                    |
+| **Shell options**         | Settings like `set -o noclobber`                   |
+| **Startup files**         | Like `.bashrc`, `.bash_profile`, etc.              |
 
 <br>
+
+**Where is the shell environment defined?**
+| File               | Purpose                                       |
+| ------------------ | --------------------------------------------- |
+| `~/.bashrc`        | User-specific settings for interactive shells |
+| `~/.profile`       | Run at login (also loads `.bashrc`)           |
+| `/etc/profile`     | System-wide login shell config                |
+| `/etc/bash.bashrc` | System-wide interactive shell config          |
+
+<br>
+
+**How to view your current shell environment?**
+```
+env         # List all environment variables
+printenv    # Similar to env
+set         # Lists all shell variables (environment + functions)
+```
+<br>
+
+### Environment variable
+An environment variable is a key-value pair stored in your shell’s environment that can affect how processes and programs run.
+
+Example:
+```
+PATH=/usr/local/bin:/usr/bin:/bin
+JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+EDITOR=nano
+```
+
+Each of these variables holds some value that the system or applications refer to.
+
+<br>
+
+**Common use cases**
+| Variable    | Purpose                                                                                  |
+| ----------- | ---------------------------------------------------------------------------------------- |
+| `PATH`      | Tells the shell where to look for executable programs (like in `/bin`, `/usr/bin`, etc.) |
+| `JAVA_HOME` | Points to the Java installation directory                                                |
+| `HOME`      | The current user’s home directory                                                        |
+| `SHELL`     | Default shell (e.g., `/bin/bash`)                                                        |
+| `USER`      | Username                                                                                 |
+| `PWD`       | Present working directory                                                                |
+| `EDITOR`    | Default text editor                                                                      |
+
+
+<br>
+
+**Steps to set an environment variable**
 
 1️⃣ List all existing environment variables
   - `printenv`
@@ -835,15 +898,16 @@ Type your text. `Hello, this is a new file! `. Then press `Ctrl+D` to save and e
 3️⃣ Setting a temporary environment variable (for the current shell session)
   - `export VARIABLE_NAME=value`
 
-4️⃣ Setting a pemanent environment variable (for the current shell session)
-  - `export VARIABLE_NAME=value`
-  - Add env variable in `./bashrc` (configuration file), using any text editor, and save the file
+4️⃣ Setting a permanent environment variable (for the future session)
+  - Open your `~/.bashrc` or `~/.profile` (shell configuration file)
+  - Add `export VARIABLE_NAME=value`
+  - Save this file
   - Reload configuration file using `source ~/.bashrc`
 
 5️⃣ Unsetting a temporary environment variable
   - `unset VARIABLE_NAME`
 
-6️⃣ Unsetting a pemanent environment variable
+6️⃣ Unsetting a permanent environment variable
   - Open `./bashrc` file, locate the line that exports the variable you want to unset
   - Delete or comment out the line and save the file
   - Reload configuration file using `source ~/.bashrc`
