@@ -1471,11 +1471,31 @@ Linux provides three special permission bits in addition to the standard `rwx` (
 
   | Examples            | Description                                                     |
   |-----------          |-------------                                                    |
-  | `ifconfig`          | Check IP of your machine                                        |
+  | `ifconfig`          | Check IP of your machine (older command, may not work)          |
+  | `ip`                | Utility for managing networking                                 |
+  | `ip a`              | View IP addresses of all network interfaces                     |
+  | `ethtool  -i enx0`  | Check if interface `enx0` is virtual or physical                |
+  | `ip link set enx0 down` | Set the interface `enx0` down (Not recommended, if its a primary interface)|
+  | `ip link set enx0 up`   | Set the interface `enx0` up                                 |
   | `ping URL`          | check if a server or website is accesible or not                |
+  | `ping IP`           | check if an IP is accissible or not                             |
+  | `dig`               | DNS lookup utility                                              |
+  | `dig URL`           | Show DNS resolution for the URL                                 |
+  | `dig URL @8.8.8.8`  | Resolve URL through DNS server `8.8.8.8`                        |
+  | `ip route`          | Display, add, modify, or delete static routes in the IP routing table |
+  | `resolvectl status` | Shows current DNS resolution status                             |
   | `telnet IP Port`    | check if a IP:PORT is accessible and open or not                |
   | `netstat -putan \| grep 80` | check if port is open or not on our server              |
   | `traceroute`        | check all hubs in network path to reach a website               |
+  | `sudo losf -i :80`  | Check if service is running on the port                         |
+  | `sudo ufw status`   | Check uncomplicated firewall status (internal firewall)         |
+  | `sudo ufw enable`   | Enable firewall (default: incoming off, outgoing on)            |
+  | `sudo ufw allow ssh` | Allow incoming SSH connections (do this before enabling `ufw`) |
+  | `sudo ufw allow http` | Allow incoming HTTP connections                               |
+
+  <br>
+
+  - `/etc/resolve.conf` - It is a configuration file on Unix-like systems that specifies DNS (Domain Name System) servers your system uses to resolve domain names to IP addresses.
 
 <p align="right"><a href="#-table-of-contents">Back to TOC</a></p>
 
